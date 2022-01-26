@@ -54,6 +54,14 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
     zipAfterPublish: true #Specifies to add the build results to a .zip file
 
+- template: templates/build.yml
+  paramters:
+    buildConfiguration: 'Debug'
+
+- template: templates/build.yml
+  paramters:
+    buildConfiguration: 'Release'
+
 - task: PublishBuildArtifacts@1 #publishes the .zip file to Azure Pipelines
   displayName: 'Publish Artifact: drop' #specifies to run the task only when the previous task succeeds
   condition: succeeded() #default condition, no need to specify it 
